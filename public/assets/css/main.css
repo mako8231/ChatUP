@@ -1,0 +1,43 @@
+@font-face {
+    font-family: pixelfySans;
+    src: url("../fonts/PixelifySans-Regular.ttf");
+}
+
+.title {
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(43, 40, 73);
+}
+
+.title p {
+    font-size: 15pt;
+}
+
+#chatbox {
+    margin-top: 210px;
+}
+
+.input-chat {
+    background-color: rgb(43, 40, 73);
+}
+
+.message-body {
+    font-size: 15pt;
+}
+
+.username {
+    color: greenyellow;
+}
+
+#send-button {
+    margin-top: 10px;
+    background-color: rgb(75, 73, 104);
+    border-color: white;
+}
+
+
+body {
+    background-color: rgb(21, 20, 29);
+    color: rgb(235, 204, 195);
+    font-family: pixelfySans;
+}
