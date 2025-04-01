@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://"+location.host+"/endpoint/");
+const socket = new WebSocket("wss://"+location.host+"/endpoint/");
 const chatBox = document.getElementById("chat")
 
 socket.onopen = function(e) {
