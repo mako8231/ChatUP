@@ -13,8 +13,11 @@
     font-size: 15pt;
 }
 
-#chatbox {
-    margin-top: 210px;
+
+.message-box {
+    height: 40vh;
+    overflow-y: auto;
+
 }
 
 .input-chat {

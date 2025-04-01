@@ -9,13 +9,14 @@ import (
 )
 
 // Message handler function
-func messageHandler(messageBytes []byte) {
+func messageHandler(messageBytes []byte) map[string]interface{} {
 	var jsonMapData map[string]interface{}
 	messageString := string(messageBytes)
 
 	json.Unmarshal([]byte(messageString), &jsonMapData)
 	fmt.Println(jsonMapData)
 
+	return jsonMapData
 }
 
 func main() {

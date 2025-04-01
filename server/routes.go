@@ -63,7 +63,15 @@ func (svr *Server) HandleEndpoint(w http.ResponseWriter, r *http.Request) {
 					log.Println("Recovered: ", r)
 				}
 			}()
-			svr.MessageHandler(message)
+			data := svr.MessageHandler(message)
+			err := svr.validateMessage(data)
+			//if the data isnt valid:
+			if err != nil {
+				svr.WriteMessage([]byte(err.Error()))
+			} else {
+				text := data["username"].(string) + ": " + data["message"].(string)
+				svr.WriteMessage([]byte("!msg" + text))
+			}
 		}(message)
 	}
 

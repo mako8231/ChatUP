@@ -1,6 +1,7 @@
 package server
 
 import (
+	"errors"
 	"log"
 	"net/http"
 	"sync"
@@ -26,13 +27,13 @@ import (
 type Server struct {
 	Router         *mux.Router
 	Clients        map[*websocket.Conn]bool
-	MessageHandler func(message []byte)
+	MessageHandler func(message []byte) map[string]interface{}
 	Mutex          *sync.RWMutex
 	Upgrader       websocket.Upgrader
 }
 
 // Initialize the server and returns the memory address
-func StartServer(MessageHandler func(messageBytes []byte)) *Server {
+func StartServer(MessageHandler func(messageBytes []byte) map[string]interface{}) *Server {
 	var svr Server
 
 	svr.Router = &mux.Router{}
@@ -70,4 +71,19 @@ func (server *Server) WriteMessage(message []byte) {
 		conn.WriteMessage(websocket.TextMessage, message)
 	}
 	server.Mutex.RUnlock()
+}
+
+func (server *Server) validateMessage(msgData map[string]interface{}) error {
+	username := msgData["username"]
+	message := msgData["message"]
+
+	if username == nil {
+		return errors.New("invalid message formatting - missing field: Username")
+	}
+
+	if message == nil {
+		return errors.New("invalid message formatting - missing field: Message")
+	}
+
+	return nil
 }
