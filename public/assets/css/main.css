@@ -17,7 +17,8 @@
 .message-box {
     height: 40vh;
     overflow-y: auto;
-
+    display: flex;
+    flex-direction: column;
 }
 
 .input-chat {

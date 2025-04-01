@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/mako8231/chatup/server"
@@ -20,7 +21,18 @@ func messageHandler(messageBytes []byte) map[string]interface{} {
 }
 
 func main() {
-	srv := server.StartServer(messageHandler)
+	//Run the main application with the following arguments:
+	//./program <port>
+	execArgs := os.Args
+	port := "8080"
+
+	fmt.Println(len(execArgs))
+
+	if len(execArgs) >= 2 {
+		port = execArgs[1]
+	}
+
+	srv := server.StartServer(messageHandler, port)
 
 	// Send a ticker to check the broadcast lifetime
 	ticker := time.NewTicker(5 * time.Second)

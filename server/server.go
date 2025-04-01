@@ -33,7 +33,7 @@ type Server struct {
 }
 
 // Initialize the server and returns the memory address
-func StartServer(MessageHandler func(messageBytes []byte) map[string]interface{}) *Server {
+func StartServer(MessageHandler func(messageBytes []byte) map[string]interface{}, port string) *Server {
 	var svr Server
 
 	svr.Router = &mux.Router{}
@@ -55,8 +55,8 @@ func StartServer(MessageHandler func(messageBytes []byte) map[string]interface{}
 	svr.Router.PathPrefix("/").Handler(fs)
 
 	go func() {
-		log.Println("Server is listening in http://127.0.0.1:8080/")
-		if err := http.ListenAndServe(":8080", svr.Router); err != nil {
+		log.Println("Server is listening in http://127.0.0.1:" + port + "/")
+		if err := http.ListenAndServe(":"+port, svr.Router); err != nil {
 			log.Fatal("Failed to start the server: ", err.Error())
 		}
 
