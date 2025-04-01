@@ -13,3 +13,5 @@ go version `>=1.22.0`
 ```shell
 go run main.go <port_number>
 ```
+
+You can also check the running project [here](https://chatup-production-7a28.up.railway.app/)
